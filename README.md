@@ -1,14 +1,14 @@
 <div align="center">
 
-# 🛡️ csplint
+# 🛡️ cspcheck
 
 ### Lint your Content-Security-Policy for XSS holes — locally, no website to paste into.
 
-[![npm version](https://img.shields.io/npm/v/csplint.svg?color=success)](https://www.npmjs.com/package/csplint)
-[![bundle size](https://img.shields.io/bundlephobia/minzip/csplint?label=core%20gzip)](https://bundlephobia.com/package/csplint)
-[![CI](https://github.com/didrod205/csplint/actions/workflows/ci.yml/badge.svg)](https://github.com/didrod205/csplint/actions/workflows/ci.yml)
-[![types](https://img.shields.io/npm/types/csplint.svg)](https://www.npmjs.com/package/csplint)
-[![license](https://img.shields.io/npm/l/csplint.svg)](./LICENSE)
+[![npm version](https://img.shields.io/npm/v/cspcheck.svg?color=success)](https://www.npmjs.com/package/cspcheck)
+[![bundle size](https://img.shields.io/bundlephobia/minzip/cspcheck?label=core%20gzip)](https://bundlephobia.com/package/cspcheck)
+[![CI](https://github.com/didrod205/cspcheck/actions/workflows/ci.yml/badge.svg)](https://github.com/didrod205/cspcheck/actions/workflows/ci.yml)
+[![types](https://img.shields.io/npm/types/cspcheck.svg)](https://www.npmjs.com/package/cspcheck)
+[![license](https://img.shields.io/npm/l/cspcheck.svg)](./LICENSE)
 
 </div>
 
@@ -19,13 +19,13 @@ opens a JSONP/AngularJS bypass — so an attacker runs scripts *despite* your po
 The only good analyzer, Google's CSP Evaluator, is **a website you paste into** —
 not something you can run in CI.
 
-**csplint lints a CSP for these holes locally and deterministically** — from a
+**cspcheck lints a CSP for these holes locally and deterministically** — from a
 string, an HTML `<meta>`, or a headers file — and it's **nonce / hash /
 strict-dynamic aware**, so it won't cry wolf about an `'unsafe-inline'` that
 modern browsers already ignore.
 
 ```bash
-npx csplint scan -p "default-src 'self'; script-src 'self' 'unsafe-inline' ajax.googleapis.com"
+npx cspcheck scan -p "default-src 'self'; script-src 'self' 'unsafe-inline' ajax.googleapis.com"
 ```
 
 ```
@@ -38,7 +38,7 @@ policy  57/100 (F)
 
 ---
 
-## Why csplint?
+## Why cspcheck?
 
 - 🎯 **It knows the bypasses.** The built-in list of hosts that undermine an
   allowlist (JSONP endpoints, hosted AngularJS) is the core insight behind Google's
@@ -59,11 +59,11 @@ facts a chatbot gets wrong — and you need this gating *every* CSP change, not 
 
 ```bash
 # run it now
-npx csplint scan -p "<your CSP>"
+npx cspcheck scan -p "<your CSP>"
 
 # or add it
-npm install -g csplint      # global CLI
-npm install -D csplint      # CI dependency
+npm install -g cspcheck      # global CLI
+npm install -D cspcheck      # CI dependency
 ```
 
 Node ≥ 18. The core is dependency-free and browser-safe (ready for a web playground).
@@ -71,12 +71,12 @@ Node ≥ 18. The core is dependency-free and browser-safe (ready for a web playg
 ## Quick start
 
 ```bash
-csplint scan -p "default-src 'self'; script-src 'self' 'nonce-abc'"   # a string
-csplint scan index.html                                               # from <meta>
-csplint scan _headers vercel.json                                     # from configs
-curl -sI https://example.com | csplint scan                           # from live headers
-csplint scan -p "<csp>" --min-score 80                                # CI gate
-csplint init                                                          # write a config
+cspcheck scan -p "default-src 'self'; script-src 'self' 'nonce-abc'"   # a string
+cspcheck scan index.html                                               # from <meta>
+cspcheck scan _headers vercel.json                                     # from configs
+curl -sI https://example.com | cspcheck scan                           # from live headers
+cspcheck scan -p "<csp>" --min-score 80                                # CI gate
+cspcheck init                                                          # write a config
 ```
 
 See [`examples/sample-report.md`](./examples/sample-report.md), and
@@ -101,18 +101,18 @@ your policy fails the build:
 
 ```yaml
 # .github/workflows/ci.yml
-- run: npx csplint scan next.config.js --min-score 85   # or your _headers / meta
+- run: npx cspcheck scan next.config.js --min-score 85   # or your _headers / meta
 ```
 
 **2. Audit a policy before you ship it.** Paste the header you're about to deploy
 and see the holes — locally, without sending your config to a third-party site.
 
-**3. Triage a security finding.** A scanner said "weak CSP" — `csplint scan` tells
+**3. Triage a security finding.** A scanner said "weak CSP" — `cspcheck scan` tells
 you *which* directive and *why*, with the exact fix.
 
 ## Configuration
 
-`csplint init` writes `csplint.config.json`:
+`cspcheck init` writes `cspcheck.config.json`:
 
 ```jsonc
 {
@@ -126,7 +126,7 @@ you *which* directive and *why*, with the exact fix.
 ## Library API
 
 ```ts
-import { analyzeCsp, DEFAULT_CONFIG } from "csplint";
+import { analyzeCsp, DEFAULT_CONFIG } from "cspcheck";
 
 const [report] = analyzeCsp("inline", "script-src 'self' 'unsafe-inline'", DEFAULT_CONFIG);
 for (const f of report.findings) console.log(f.severity, f.rule, f.directive);
@@ -146,16 +146,16 @@ Also exported: `analyzePolicy`, `parsePolicies`, `extractPolicies`, `findBypass`
 
 ## 💖 Sponsor
 
-csplint is free and MIT-licensed, built and maintained in spare time. If it caught
+cspcheck is free and MIT-licensed, built and maintained in spare time. If it caught
 a hole in your CSP, please consider supporting it:
 
 - ⭐ **Star this repo** — the simplest free way to help others find it.
 - 🍋 **[Sponsor via Lemon Squeezy](https://elab-studio.lemonsqueezy.com/checkout/buy/5d059b89-51d0-456b-b33a-ed56994f7010)** — one-time or recurring.
 
 > The bypassable-host insight is owed to the research behind
-> [Google's CSP Evaluator](https://csp-evaluator.withgoogle.com). csplint is an
+> [Google's CSP Evaluator](https://csp-evaluator.withgoogle.com). cspcheck is an
 > independent, offline implementation and is not affiliated with it.
 
 ## License
 
-[MIT](./LICENSE) © csplint contributors
+[MIT](./LICENSE) © cspcheck contributors

@@ -1,7 +1,7 @@
 {
-  "tool": "csplint",
+  "tool": "cspcheck",
   "version": "0.1.0",
-  "generatedAt": "2026-06-05T01:01:24.040Z",
+  "generatedAt": "2026-06-05T01:29:08.164Z",
   "summary": {
     "policies": 3,
     "score": 75,

@@ -1,4 +1,4 @@
-/** Core types for csplint. */
+/** Core types for cspcheck. */
 
 export type Severity = "error" | "warning" | "info" | "pass";
 
@@ -46,7 +46,7 @@ export interface PolicyReport {
 }
 
 export interface Report {
-  tool: "csplint";
+  tool: "cspcheck";
   version: string;
   generatedAt: string;
   summary: {

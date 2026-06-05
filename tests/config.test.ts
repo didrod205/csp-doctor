@@ -23,14 +23,14 @@ describe("config", () => {
   });
 
   it("loadConfig returns defaults when no file is present", () => {
-    const dir = mkdtempSync(join(tmpdir(), "csplint-"));
+    const dir = mkdtempSync(join(tmpdir(), "cspcheck-"));
     expect(loadConfig(undefined, dir).minScore).toBe(DEFAULT_CONFIG.minScore);
     rmSync(dir, { recursive: true, force: true });
   });
 
   it("loadConfig reads an explicit file", () => {
-    const dir = mkdtempSync(join(tmpdir(), "csplint-"));
-    const file = join(dir, "csplint.config.json");
+    const dir = mkdtempSync(join(tmpdir(), "cspcheck-"));
+    const file = join(dir, "cspcheck.config.json");
     writeFileSync(file, JSON.stringify({ minScore: 70 }));
     expect(loadConfig(file).minScore).toBe(70);
     rmSync(dir, { recursive: true, force: true });

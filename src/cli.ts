@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-/** csplint command-line interface. */
+/** cspcheck command-line interface. */
 
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
@@ -16,10 +16,10 @@ import { toJSON } from "./report/json.js";
 import { toMarkdown } from "./report/markdown.js";
 import type { Config, PolicyReport, Report } from "./types.js";
 
-const cli = cac("csplint");
+const cli = cac("cspcheck");
 
 function fail(message: string): never {
-  console.error(`${pc.red("csplint:")} ${message}`);
+  console.error(`${pc.red("cspcheck:")} ${message}`);
   process.exit(2);
 }
 
@@ -44,9 +44,9 @@ cli
   .option("--md <file>", "Write a Markdown report to this path")
   .option("--min-score <n>", "CI gate: exit non-zero if the overall score is below this")
   .option("--quiet", "Show only per-policy summary lines")
-  .example('  csplint scan -p "default-src \'self\'; script-src \'self\' \'unsafe-inline\'"')
-  .example("  csplint scan index.html _headers")
-  .example("  curl -sI https://example.com | csplint scan")
+  .example('  cspcheck scan -p "default-src \'self\'; script-src \'self\' \'unsafe-inline\'"')
+  .example("  cspcheck scan index.html _headers")
+  .example("  curl -sI https://example.com | cspcheck scan")
   .action((files: string[], options: ScanOptions) => {
     try {
       const config: Config = loadConfig(options.config);
@@ -94,7 +94,7 @@ cli
 
       const minScore = options.minScore !== undefined ? Number(options.minScore) : config.minScore;
       if (report.summary.score < minScore) {
-        console.error(`\n${pc.red("csplint:")} score ${report.summary.score} is below the minimum ${minScore}.`);
+        console.error(`\n${pc.red("cspcheck:")} score ${report.summary.score} is below the minimum ${minScore}.`);
         process.exit(1);
       }
     } catch (e) {
@@ -121,16 +121,16 @@ cli
   });
 
 cli
-  .command("init", "Write a csplint.config.json with the defaults")
+  .command("init", "Write a cspcheck.config.json with the defaults")
   .option("--force", "Overwrite an existing config")
   .action((options: { force?: boolean }) => {
-    const file = resolve("csplint.config.json");
+    const file = resolve("cspcheck.config.json");
     if (existsSync(file) && !options.force) {
-      console.error(`${pc.red("csplint:")} csplint.config.json already exists (use --force).`);
+      console.error(`${pc.red("cspcheck:")} cspcheck.config.json already exists (use --force).`);
       process.exit(1);
     }
     writeFileSync(file, JSON.stringify(DEFAULT_CONFIG, null, 2) + "\n");
-    console.log("Created csplint.config.json");
+    console.log("Created cspcheck.config.json");
   });
 
 cli.help();
