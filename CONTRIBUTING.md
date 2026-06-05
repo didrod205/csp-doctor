@@ -1,4 +1,4 @@
-# Contributing to cspcheck
+# Contributing to csp-doctor
 
 Thanks for your interest! Most contributions are a new weakness rule or an
 addition to the bypassable-host list — both small and data-driven.
@@ -6,8 +6,8 @@ addition to the bypassable-host list — both small and data-driven.
 ## Getting started
 
 ```bash
-git clone https://github.com/didrod205/cspcheck.git
-cd cspcheck
+git clone https://github.com/didrod205/csp-doctor.git
+cd csp-doctor
 npm install
 npm test            # vitest
 npm run typecheck   # tsc --noEmit

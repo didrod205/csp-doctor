@@ -1,5 +1,5 @@
 {
-  "name": "cspcheck",
+  "name": "csp-doctor",
   "version": "0.1.0",
   "description": "Lint a Content-Security-Policy for XSS holes — locally, no website. Flags 'unsafe-inline', 'unsafe-eval', wildcards, missing object-src/base-uri/frame-ancestors, and allowlisted hosts known to bypass CSP (JSONP/AngularJS) — nonce/hash/strict-dynamic aware. Deterministic CLI, JSON/Markdown reports, no API key.",
   "type": "module",
@@ -14,7 +14,7 @@
     }
   },
   "bin": {
-    "cspcheck": "./dist/cli.js"
+    "csp-doctor": "./dist/cli.js"
   },
   "files": [
     "dist"
@@ -48,12 +48,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/didrod205/cspcheck.git"
+    "url": "git+https://github.com/didrod205/csp-doctor.git"
   },
   "bugs": {
-    "url": "https://github.com/didrod205/cspcheck/issues"
+    "url": "https://github.com/didrod205/csp-doctor/issues"
   },
-  "homepage": "https://github.com/didrod205/cspcheck#readme",
+  "homepage": "https://github.com/didrod205/csp-doctor#readme",
   "dependencies": {
     "cac": "^6.7.14",
     "picocolors": "^1.1.1"

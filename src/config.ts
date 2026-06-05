@@ -9,7 +9,7 @@ export const DEFAULT_CONFIG: Config = {
   minScore: 0,
 };
 
-export const CONFIG_FILENAMES = ["cspcheck.config.json", ".cspcheckrc.json", ".cspcheckrc"];
+export const CONFIG_FILENAMES = ["csp-doctor.config.json", ".csp-doctorrc.json", ".csp-doctorrc"];
 
 function isPlainObject(v: unknown): v is Record<string, unknown> {
   return typeof v === "object" && v !== null && !Array.isArray(v);

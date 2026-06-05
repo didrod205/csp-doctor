@@ -1,4 +1,4 @@
-/** Core types for cspcheck. */
+/** Core types for csp-doctor. */
 
 export type Severity = "error" | "warning" | "info" | "pass";
 
@@ -46,7 +46,7 @@ export interface PolicyReport {
 }
 
 export interface Report {
-  tool: "cspcheck";
+  tool: "csp-doctor";
   version: string;
   generatedAt: string;
   summary: {

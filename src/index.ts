@@ -1,11 +1,11 @@
 /**
- * cspcheck — lint a Content-Security-Policy for XSS holes, locally and
+ * csp-doctor — lint a Content-Security-Policy for XSS holes, locally and
  * deterministically. Parses a CSP and flags 'unsafe-inline', wildcards, missing
  * object-src/base-uri/frame-ancestors, and allowlisted hosts known to bypass CSP
  * — nonce/hash/strict-dynamic aware. No website, no API key.
  *
  * ```ts
- * import { analyzeCsp, DEFAULT_CONFIG } from "cspcheck";
+ * import { analyzeCsp, DEFAULT_CONFIG } from "csp-doctor";
  * const [report] = analyzeCsp("policy", "script-src 'self' 'unsafe-inline'", DEFAULT_CONFIG);
  * ```
  */

@@ -56,7 +56,7 @@ export function buildReport(
     : 100;
 
   return {
-    tool: "cspcheck",
+    tool: "csp-doctor",
     version: meta.version,
     generatedAt: meta.generatedAt,
     summary: { policies: policies.length, score, grade: gradeFor(score), errors, warnings, infos },
