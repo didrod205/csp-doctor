@@ -1,0 +1,167 @@
+{
+  "tool": "csplint",
+  "version": "0.1.0",
+  "generatedAt": "2026-06-05T01:01:24.040Z",
+  "summary": {
+    "policies": 3,
+    "score": 75,
+    "grade": "C",
+    "errors": 2,
+    "warnings": 8,
+    "infos": 2
+  },
+  "policies": [
+    {
+      "source": "examples/weak.csp.txt",
+      "reportOnly": false,
+      "score": 57,
+      "grade": "F",
+      "counts": {
+        "error": 1,
+        "warning": 5,
+        "info": 1
+      },
+      "findings": [
+        {
+          "rule": "unsafe-inline",
+          "category": "xss",
+          "severity": "error",
+          "directive": "script-src",
+          "source": "'unsafe-inline'",
+          "title": "'unsafe-inline' in script-src defeats XSS protection",
+          "message": "Inline <script> blocks and on*= handlers execute — exactly what CSP is meant to stop.",
+          "fix": "Remove 'unsafe-inline' and use a per-request nonce (`'nonce-…'`) or hashes, plus `'strict-dynamic'`."
+        },
+        {
+          "rule": "unsafe-eval",
+          "category": "xss",
+          "severity": "warning",
+          "directive": "script-src",
+          "source": "'unsafe-eval'",
+          "title": "'unsafe-eval' allows eval() / new Function()",
+          "message": "String-to-code execution stays enabled, widening the XSS surface.",
+          "fix": "Remove 'unsafe-eval' and refactor any eval()/new Function() usage."
+        },
+        {
+          "rule": "scheme-https-script",
+          "category": "xss",
+          "severity": "warning",
+          "directive": "script-src",
+          "source": "https:",
+          "title": "`https:` scheme source in script-src",
+          "message": "Any HTTPS origin can serve scripts — barely narrower than a wildcard.",
+          "fix": "List specific hosts instead of the bare `https:` scheme."
+        },
+        {
+          "rule": "bypass-host",
+          "category": "allowlist",
+          "severity": "warning",
+          "directive": "script-src",
+          "source": "ajax.googleapis.com",
+          "title": "Allowlisted host enables a CSP bypass: ajax.googleapis.com",
+          "message": "ajax.googleapis.com hosts AngularJS (CSP-bypass gadget), so an attacker can run scripts despite the policy.",
+          "fix": "Drop the host and switch to a nonce + 'strict-dynamic' (which ignores host allowlists)."
+        },
+        {
+          "rule": "missing-base-uri",
+          "category": "missing",
+          "severity": "warning",
+          "directive": "base-uri",
+          "title": "No base-uri",
+          "message": "An injected <base> tag can rewrite relative script URLs to an attacker's host — bypassing your allowlist.",
+          "fix": "Add `base-uri 'none'` (or `'self'`). It does not fall back to default-src."
+        },
+        {
+          "rule": "missing-frame-ancestors",
+          "category": "missing",
+          "severity": "warning",
+          "directive": "frame-ancestors",
+          "title": "No frame-ancestors",
+          "message": "Nothing stops other sites from framing yours (clickjacking). frame-ancestors replaces X-Frame-Options.",
+          "fix": "Add `frame-ancestors 'self'` (or `'none'`)."
+        },
+        {
+          "rule": "missing-object-src",
+          "category": "missing",
+          "severity": "info",
+          "directive": "object-src",
+          "title": "object-src is not 'none'",
+          "message": "<object>/<embed> can load plugins (Flash, PDF) that execute scripts and bypass other directives.",
+          "fix": "Add `object-src 'none'` unless you genuinely embed plugins."
+        }
+      ]
+    },
+    {
+      "source": "examples/strong.csp.txt",
+      "reportOnly": false,
+      "score": 100,
+      "grade": "A",
+      "counts": {
+        "error": 0,
+        "warning": 0,
+        "info": 0
+      },
+      "findings": []
+    },
+    {
+      "source": "examples/page.html (meta)",
+      "reportOnly": false,
+      "score": 69,
+      "grade": "D",
+      "counts": {
+        "error": 1,
+        "warning": 3,
+        "info": 1
+      },
+      "findings": [
+        {
+          "rule": "unsafe-inline",
+          "category": "xss",
+          "severity": "error",
+          "directive": "script-src",
+          "source": "'unsafe-inline'",
+          "title": "'unsafe-inline' in script-src defeats XSS protection",
+          "message": "Inline <script> blocks and on*= handlers execute — exactly what CSP is meant to stop.",
+          "fix": "Remove 'unsafe-inline' and use a per-request nonce (`'nonce-…'`) or hashes, plus `'strict-dynamic'`."
+        },
+        {
+          "rule": "bypass-host",
+          "category": "allowlist",
+          "severity": "warning",
+          "directive": "script-src",
+          "source": "cdn.jsdelivr.net",
+          "title": "Allowlisted host enables a CSP bypass: cdn.jsdelivr.net",
+          "message": "cdn.jsdelivr.net hosts AngularJS / arbitrary npm packages, so an attacker can run scripts despite the policy.",
+          "fix": "Drop the host and switch to a nonce + 'strict-dynamic' (which ignores host allowlists)."
+        },
+        {
+          "rule": "missing-base-uri",
+          "category": "missing",
+          "severity": "warning",
+          "directive": "base-uri",
+          "title": "No base-uri",
+          "message": "An injected <base> tag can rewrite relative script URLs to an attacker's host — bypassing your allowlist.",
+          "fix": "Add `base-uri 'none'` (or `'self'`). It does not fall back to default-src."
+        },
+        {
+          "rule": "missing-frame-ancestors",
+          "category": "missing",
+          "severity": "warning",
+          "directive": "frame-ancestors",
+          "title": "No frame-ancestors",
+          "message": "Nothing stops other sites from framing yours (clickjacking). frame-ancestors replaces X-Frame-Options.",
+          "fix": "Add `frame-ancestors 'self'` (or `'none'`)."
+        },
+        {
+          "rule": "missing-object-src",
+          "category": "missing",
+          "severity": "info",
+          "directive": "object-src",
+          "title": "object-src is not 'none'",
+          "message": "<object>/<embed> can load plugins (Flash, PDF) that execute scripts and bypass other directives.",
+          "fix": "Add `object-src 'none'` unless you genuinely embed plugins."
+        }
+      ]
+    }
+  ]
+}

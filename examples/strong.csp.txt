@@ -1,0 +1,1 @@
+default-src 'none'; script-src 'self' 'nonce-r4nd0mBase64==' 'strict-dynamic'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; require-trusted-types-for 'script'; report-to csp-endpoint
