@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>csp-doctor — lint your Content-Security-Policy in the browser (nothing uploaded)</title>
+    <meta
+      name="description"
+      content="Paste a Content-Security-Policy to find its XSS holes — 'unsafe-inline', wildcards, missing directives, and allowlisted hosts that bypass CSP. 100% in your browser. A local-first alternative to Google's CSP Evaluator."
+    />
+    <meta property="og:title" content="csp-doctor — offline Content-Security-Policy linter" />
+    <meta property="og:description" content="Find the XSS holes in your CSP — entirely in your browser. Your policy never leaves the page." />
+    <script type="module" crossorigin src="./assets/index-BZ6EX44x.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-DM9mNqV_.css">
+  </head>
+  <body>
+    <header class="hero">
+      <h1>🛡️ csp-doctor</h1>
+      <p class="tagline">
+        Lint your <strong>Content-Security-Policy</strong> for XSS holes — right here in your browser.
+      </p>
+      <p class="privacy">🔒 100% local — your policy never leaves this page. No upload, no server.</p>
+    </header>
+
+    <main>
+      <section class="input-card">
+        <div class="input-head">
+          <label for="csp">Paste a Content-Security-Policy</label>
+          <div class="input-actions">
+            <button id="sample" type="button" class="ghost">Load sample</button>
+            <button id="clear" type="button" class="ghost">Clear</button>
+          </div>
+        </div>
+        <textarea id="csp" spellcheck="false" autocomplete="off"
+          placeholder="default-src 'self'; script-src 'self' 'unsafe-inline' …
+(a raw policy, a Content-Security-Policy: header, or an HTML &lt;meta&gt; all work)"></textarea>
+      </section>
+
+      <section id="output" class="output hidden"></section>
+    </main>
+
+    <footer>
+      <p>
+        Powered by <a href="https://www.npmjs.com/package/csp-doctor"><code>csp-doctor</code></a> —
+        the same engine, in a CLI: <code>npx csp-doctor scan</code>.
+        <a href="https://github.com/didrod205/csp-doctor">GitHub</a> · MIT
+      </p>
+      <p class="dim">Analysis runs on csp-doctor's pure, zero-dependency core. Nothing is sent anywhere. The bypassable-host insight is owed to Google's CSP Evaluator research.</p>
+    </footer>
+
+  </body>
+</html>

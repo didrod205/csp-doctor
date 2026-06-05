@@ -10,6 +10,8 @@
 [![types](https://img.shields.io/npm/types/csp-doctor.svg)](https://www.npmjs.com/package/csp-doctor)
 [![license](https://img.shields.io/npm/l/csp-doctor.svg)](./LICENSE)
 
+**[🌐 Try the browser playground →](https://didrod205.github.io/csp-doctor/)** &nbsp;·&nbsp; paste a CSP, see its XSS holes ranked. Nothing is uploaded — it all runs client-side.
+
 </div>
 
 You added a `Content-Security-Policy` to stop XSS. But a single `'unsafe-inline'`
@@ -142,7 +144,8 @@ Also exported: `analyzePolicy`, `parsePolicies`, `extractPolicies`, `findBypass`
 - `require-trusted-types-for` / Trusted Types scoring.
 - `style-src` and `connect-src` specific checks (CSS exfiltration, beacon hosts).
 - Suggest the migration to a nonce + `'strict-dynamic'` policy automatically.
-- A web playground — paste a policy, see the audit, nothing uploaded.
+- ✅ **A browser playground** — paste a policy, see the audit, nothing uploaded.
+  [Live here](https://didrod205.github.io/csp-doctor/).
 
 ## 💖 Sponsor
 
